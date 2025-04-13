@@ -8,6 +8,10 @@ if "render_back_to_home" not in st.session_state:
 if "stored_data" not in st.session_state:
     st.session_state["stored_data"] = {"data" : "","passkey": bytes("",encoding="ascii")}
 
+# Authentication Implementation
+if "logged_in" not in st.session_state:
+    st.session_state["logged_in"] = False
+
 def main():
     st.set_page_config(page_title="Secure Data Encryption",page_icon="🔒",
                        layout="wide")
@@ -15,10 +19,14 @@ def main():
     st.write("Secure your data here!")
 
     # Required for the pages to be routable
-    pg = st.navigation([st.Page("home.py"),
+    if st.session_state["logged_in"]:
+        pg = st.navigation([st.Page("home.py"),
                         st.Page("insert_data.py"),
                         st.Page("retrieve_data.py"),
                         st.Page("login.py")],position="hidden")
+    else:
+        pg = st.navigation([st.Page("login.py")],position="hidden")
+
     pg.run()
 
     if st.session_state["render_back_to_home"]:
