@@ -6,7 +6,7 @@ if "render_back_to_home" not in st.session_state:
     st.session_state["render_back_to_home"] = True
 
 if "stored_data" not in st.session_state:
-    st.session_state["stored_data"] = {"data" : "","passkey": bytes("")}
+    st.session_state["stored_data"] = {"data" : "","passkey": bytes("",encoding="ascii")}
 
 def main():
     st.set_page_config(page_title="Secure Data Encryption",page_icon="🔒",
