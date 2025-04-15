@@ -1,6 +1,7 @@
 import streamlit as st
 
 from security import gen_secure_hash,encrypt
+from data import store_data
 
 st.subheader("Insert Data")
 st.write("Store your data securely here!")
@@ -20,7 +21,7 @@ if st.button("Save"):
             "key": key,
             "passkey": gen_secure_hash(passkey,key)
         }
+        store_data(st.session_state["stored_data"])
         "Data saved!"
-        print(st.session_state["stored_data"])
     else:
         "Complete 'Data' and 'Passkey' fields before saving!"
