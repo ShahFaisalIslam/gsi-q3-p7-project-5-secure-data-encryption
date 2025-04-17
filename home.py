@@ -4,7 +4,7 @@ from data import retrieve_data
 st.subheader(f"Welcome Back, {st.session_state["user"]}")
 
 if 'stored_data' not in st.session_state:
-    st.session_state["stored_data"] = retrieve_data()
+    st.session_state["stored_data"] = retrieve_data(st.session_state["user"])
 
 [col1,col2] = st.columns(2)
 

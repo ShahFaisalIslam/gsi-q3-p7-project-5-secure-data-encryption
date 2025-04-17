@@ -21,7 +21,7 @@ if st.button("Save"):
             "key": key,
             "passkey": gen_secure_hash(passkey,key)
         }
-        store_data(st.session_state["stored_data"])
+        store_data(st.session_state["user"],st.session_state["stored_data"])
         "Data saved!"
     else:
         "Complete 'Data' and 'Passkey' fields before saving!"
