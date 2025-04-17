@@ -2,6 +2,7 @@
 # Provides functions to store and retrieve data from file
 
 import json
+from base64 import standard_b64encode,standard_b64decode
 DATA_FILE : str = "data.json"
 ENCODED_DATA_KEYS = ["data","key","passkey"]
 
@@ -12,12 +13,9 @@ def store_data(data : dict) -> None:
     '''
     stored_data : dict = {}
 
-    # For each user 
-
-    # Convert bytes in data into string
-    # for key in data.keys():
-    #     if key in ENCODED_DATA_KEYS:
-    #         stored_data[key] = str(data[key],encoding="latin-1")
+    # Store the bytes as base64-encoded strings
+    for key in data.keys():
+        stored_data[key] = str(standard_b64encode(data[key]),encoding="ascii")
 
     # Open file
     with open(DATA_FILE,"w") as data_file:
@@ -38,6 +36,8 @@ def retrieve_data() -> dict:
     try:
         with open(DATA_FILE) as data_file:
             data = json.load(data_file)
+            for key in data.keys():
+                data[key] = standard_b64decode(data[key])
     # Initialize file with data if it does not exist
     except FileNotFoundError:
         with open(DATA_FILE,"w") as data_file:

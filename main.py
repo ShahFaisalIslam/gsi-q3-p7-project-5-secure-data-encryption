@@ -1,13 +1,9 @@
 import streamlit as st
-from data import retrieve_data
 
 # To avoid navigation bar, we use 'back to home' for guiding users back
 # to home page
 if "render_back_to_home" not in st.session_state:
     st.session_state["render_back_to_home"] = True
-
-if "stored_data" not in st.session_state:
-    st.session_state["stored_data"] = retrieve_data()
 
 # Authentication Implementation
 if "logged_in" not in st.session_state:
